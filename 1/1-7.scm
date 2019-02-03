@@ -14,7 +14,7 @@
 	(/ (+ x y) 2))
 
 (define (good-enough? guess x)
-	(< (abs (- (square (improve guess x)) (square guess))) (* 0.001 (improve guess x)))
+	(< (abs (- (square (improve guess x)) (square guess))) (* 0.001 (squrre guess)))
 	)
 (define (sqrt x)
 	(sqrt-iter 1.0 x)
