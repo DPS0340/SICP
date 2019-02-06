@@ -7,10 +7,3 @@
 (display (cont-frac (lambda (i) 1.0)
            (lambda (i) 1.0)
            50))
-(define (cont-frac-b n d k)
-  (if (< k 0)
-      0
-      (/ (n k) (+ (d k) (cont-frac-b n d (- k 1))))))
-(display (cont-frac-b (lambda (i) 1.0)
-           (lambda (i) 1.0)
-           50))
