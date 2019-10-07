@@ -1,3 +1,9 @@
+(define (f x)
+  (cond ((= x 0) 0)
+        ((= x 1) 1)
+        ((= x 2) 2)
+        (else (+ (f (- x 1)) (* 2 (f (- x 2))) (* 3 (f (- x 3)))))))
+
 (define (f-prime x)
   (cond ((= x 0) 0)
         ((= x 1) 1)
