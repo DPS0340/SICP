@@ -1,30 +1,32 @@
+(define (abs x)
+  (if (< x 0)
+      (* x -1)
+      x))
+
 (define (gcd a b)
   (if (= b 0)
       a
       (gcd b (remainder a b))))
-(define (abs x) (if (< x 0)
-                    (* x -1)
-                    x))
-(define (numer x) (car x))
-(define (denom x) (cdr x))
-(define (make-rat-iter a b)
-    (define g (gcd (abs a) (abs b)))
-        (cons (/ a g) (/ b g)))
+
 (define (make-rat n d)
-  (cond ((and (< n 0) (< d 0)) (make-rat-iter (* n -1) (* d -1)))
-        ((and (< n 0) (> d 0)) (make-rat-iter n d))
-        ((and (> n 0) (< d 0)) (make-rat-iter (* n -1) (* d -1)))))
+  (let
+      ((g (gcd (abs n) (abs d))))
+    (cond ((and (< n 0) (< d 0))(cons (/ (abs n) g) (/ (abs d) g)))
+          ((and (< n 0) (>= d 0))(cons (/ n g) (/ d g)))
+          ((and (>= n 0) (< d 0)) (cons (/ (* n -1) g) (/ (abs d) g)))
+          (else (cons (/ n g) (/ d g))))))
+
+(define (numer x) (car x))
+
+(define (denom x) (cdr x))
+
 (define (print-rat x)
   (newline)
   (display (numer x))
   (display "/")
   (display (denom x)))
-(define a (make-rat -2 -4))
-(print-rat a)
-(define b (make-rat -2 4))
-(print-rat b)
-(define c (make-rat 2 -4))
-(print-rat c)
-;1/2
-;-1/2
-;-1/2
+
+(print-rat (make-rat -1 -5))
+(print-rat (make-rat 1 -5))
+(print-rat (make-rat -1 5))
+(print-rat (make-rat 1 5))
