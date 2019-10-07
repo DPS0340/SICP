@@ -1,0 +1,6 @@
+(expmod base (/ exp 2) m) -> O(log n)
+
+but, it'll take memory usage O(n).
+unlike this, (square x) -> eval x -> let the x constant, x * x.
+it's O(log n).
+memory usage O(n) like the branch. function called recursively each times.
