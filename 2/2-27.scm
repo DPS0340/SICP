@@ -4,7 +4,7 @@
     (if (null? list1)
         result
         (if (pair? (car list1))
-            (deep-reverse-iter (cons (reverse (car list1)) result) (cdr list1))
+            (deep-reverse-iter (cons (deep-reverse (car list1)) result) (cdr list1))
             (deep-reverse-iter (cons (car list1) result) (cdr list1)))))
   (deep-reverse-iter empty list))
 
