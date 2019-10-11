@@ -95,7 +95,7 @@
       nil
       (if (pair? (car tree))
           (cons (parse-tree f (car tree)) (parse-tree f (cdr tree)))
-          (f (car tree)))))
+          (cons (f (car tree)) (parse-tree f (cdr tree))))))
 
 (define (parse-tree-cond f filter tree)
   (define (go rest)
