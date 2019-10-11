@@ -5,7 +5,7 @@
       (+ (f (- n 1)) (* (f (- n 2)) 2) (* (f (- n 3)) 3))
       ))
 
-;iterating
+; iterating
 (define (g n)
   (define (go a b c k)
     (if (>= k n)
