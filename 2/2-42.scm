@@ -37,14 +37,18 @@
   (define (adjoin-position new-row k rest-of-queens)
     (cons (location new-row k) rest-of-queens))
   (define (safe? k positions)
-    (if (or (null? positions) (null? (car positions)) (null? (cdr positions)) (null? (car (cdr positions))))
+    (define (safe-iter rest)
+      (if (null? rest)
+          #t
+          (let (
+                (my (car positions))
+                (opposite (car rest)))
+            (if (or (= (get-x my) (get-x opposite)) (= (get-y my) (get-y opposite)) (= (abs (- (get-y my) (get-y opposite))) (abs (- (get-x my) (get-x opposite)))))
+                #f
+                (safe-iter (cdr rest))))))
+    (if (null? positions)
         #t
-        (let (
-              (my (car positions))
-              (opposite (car (cdr positions))))
-        (if (or (= (get-x my) (get-x opposite)) (= (get-y my) (get-y opposite)) (= (abs (- (get-y my) (get-y opposite))) (abs (- (get-x my) (get-x opposite)))))
-            #f
-            (safe? (- k 1) (cdr positions))))))
+        (safe-iter (cdr positions))))
   (define (queen-cols k)
     (if (= k 0)
         (list empty-board)
@@ -58,5 +62,5 @@
           (queen-cols (- k 1))))))
   (queen-cols board-size))
 
-(queens 3) ; {{{1 3} {3 2} {1 1}} {{3 3} {1 2} {3 1}}}
-; it works well
+(queens 4) ; {{{3 4} {1 3} {4 2} {2 1}} {{2 4} {4 3} {1 2} {3 1}}}
+; it works well(really)
