@@ -75,7 +75,7 @@
         (else
          (error "unknown expression type -- DERIV" exp))))
 
-(deriv `(** x 10) `x) ; {+ {+ {* 1 x} {* 1 x}} {+ {* 1 x} {* 1 x}}}
+(deriv `(** x 10) `x)
 
 ; {* 10 {** x 9}}
 
