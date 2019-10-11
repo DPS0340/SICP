@@ -1,15 +1,20 @@
-(define (f x)
-  (cond ((= x 0) 0)
-        ((= x 1) 1)
-        ((= x 2) 2)
-        (else (+ (f (- x 1)) (* 2 (f (- x 2))) (* 3 (f (- x 3)))))))
+; recursive
+(define (f n)
+  (if (< n 3)
+      n
+      (+ (f (- n 1)) (* (f (- n 2)) 2) (* (f (- n 3)) 3))
+      ))
 
-(define (f-prime x)
-  (cond ((= x 0) 0)
-        ((= x 1) 1)
-        ((= x 2) 2)
-        (else (f-iter x 3 0 1 2))))
+;iterating
+(define (g n)
+  (define (go a b c k)
+    (if (>= k n)
+        c
+        (go b c (+ c (* 2 b) (* 3 a)) (+ k 1))))
+  (if (< n 3)
+      n
+      (go 0 1 2 2)
+      ))
 
-(define (f-iter x count a b c)
-  (cond ((= x count) (+ (* 3 a) (* 2 b) c))
-        (else (f-iter x (+ count 1) b c (+ (* 3 a) (* 2 b) c)))))
+(f 7) ; 142
+(g 7) ; 142
