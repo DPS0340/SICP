@@ -1,5 +1,0 @@
-(define (tan-cf x k)
-  (define (tan-cf-iter x count)
-    (cond ((> count k) 0)
-          (else (/ x (- (- (* 2 count) 1) (tan-cf-iter x (+ count 1)))))))
-  (tan-cf-iter x 1))

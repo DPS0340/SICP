@@ -1,0 +1,23 @@
+#lang sicp
+(define (square x) (* x x))
+(define (add x) (+ x 1))
+(define (self x) x)
+(define (filtered-accumulate combiner null-value term a next b filter)
+  (if (> a b)
+      null-value
+      (if (filter (term a))
+          (combiner (term a) (filtered-accumulate combiner null-value term (next a) next b filter))
+          (combiner null-value (filtered-accumulate combiner null-value term (next a) next b filter)))))
+;(define (square-prime-sum a b)
+;  (filtered-accumulate + 0 square a add b prime?)); prime is not defined for now
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+(define (question-b n)
+    (define (filter i)
+    (if (< i n)
+        (= (gcd i n) 1)
+        (= 1 0)))
+  (filtered-accumulate * 1 self 1 add n filter))
+(display (question-b 10))
