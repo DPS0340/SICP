@@ -20,9 +20,9 @@
 
 (define (+rat x y)
     (make-rat 
-        (+ (* (numer x) (denom y)
-            (* (numer y) (denom x))))
-        (* (denum x) (denom y))))
+        (+ (* (numer x) (denom y))
+            (* (numer y) (denom x)))
+        (* (denom x) (denom y))))
 
 ; multiply of two rational number
 (define (*rat x y)
@@ -38,3 +38,63 @@
 ; (x+y)*(s+t)
 ; -----------
 ; (*rat (+rat x y) (+rat s t))
+
+
+; (cons x y)
+;   constructs a pair whose first part is
+;   x and whose second part is y
+;
+; (car p)
+;   selects the first part of the pair p
+;
+; (cdr p)
+;   selects the second part of the pair p 
+
+(cons 2 3)
+
+; 
+; box and pointer
+;
+;     |
+;     V
+;  --------- 
+;  | 2 | 3 | 
+;  ---------
+
+; For any x and y
+;
+;   (car (cons x y)) is x
+;   (cdr (cons x y)) is y
+
+
+(define (make-rat n d)
+    (cons n d))
+;
+; ---
+;
+(define (numer x) (car x))
+
+(define (denom x) (cdr x))
+
+(define a (make-rat 1 2))
+(define b (make-rat 1 4))
+(define ans (+rat a b))
+
+(numer ans); -> 6
+(denom ans); -> 8
+
+(define (make-rat-fixed n d)
+    (let ((g (gcd n d)))
+        (cons (/ n g)
+              (/ d g))))
+
+(define (gcd a b)
+    (if (= b 0)
+        a
+        (gcd b (remainder a b))))
+;
+; for working example. not in lecture
+;
+(define _a (make-rat-fixed 2 4))
+(numer _a)
+(denom _a)
