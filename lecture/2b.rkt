@@ -98,3 +98,12 @@
 (define _a (make-rat-fixed 2 4))
 (numer _a)
 (denom _a)
+
+(define a 5)
+
+
+(let ((z 10))
+    (+ z z)); -> 20
+
+; z; unbound variable
+; let -> local variable
