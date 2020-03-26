@@ -1,5 +1,29 @@
 #lang sicp
 
+; dependency
+
+(define (square x) 
+	(* x x))
+
+(define (sqrt-iter guess x)
+	(if (good-enough? guess x)
+	    guess
+	    (sqrt-iter (improve guess x)
+	               x)))
+
+(define (improve guess x)
+	(average guess (/ x guess)))
+
+(define (average x y)
+	(/ (+ x y) 2))
+
+(define (good-enough? guess x)
+	(< (abs (- (square (improve guess x)) (square guess))) (* 0.001 (square guess)))
+	)
+(define (sqrt x)
+	(sqrt-iter 1.0 x)
+	)
+
 ; Fraction System
 
 ; Formula Explained
@@ -19,7 +43,7 @@
 ; add of two rational number
 
 (define (+rat x y)
-    (make-rat 
+    (make-rat
         (+ (* (numer x) (denom y))
             (* (numer y) (denom x)))
         (* (denom x) (denom y))))
@@ -48,17 +72,17 @@
 ;   selects the first part of the pair p
 ;
 ; (cdr p)
-;   selects the second part of the pair p 
+;   selects the second part of the pair p
 
 (cons 2 3)
 
-; 
+;
 ; box and pointer
 ;
 ;     |
 ;     V
-;  --------- 
-;  | 2 | 3 | 
+;  ---------
+;  | 2 | 3 |
 ;  ---------
 
 ; For any x and y
@@ -99,8 +123,6 @@
 (numer _a)
 (denom _a)
 
-(define a 5)
-
 
 (let ((z 10))
     (+ z z)); -> 20
@@ -118,7 +140,7 @@
 
 (define (make-vector x y) (cons x y))
 
-(define (xcor p) (par p))
+(define (xcor p) (car p))
 
 (define (ycor p) (cdr p))
 
@@ -126,7 +148,7 @@
 
 (define (make-seg p q) (cons p q))
 
-(define (set-start s) (car s))
+(define (seg-start s) (car s))
 
 (define (seg-end s) (cdr s))
 
@@ -139,5 +161,30 @@
             (average (xcor a) (xcor b))
             (average (ycor a) (ycor b)))))
 
-(define (average x y) (/ (+ x y) 2))
+; length of line segment
 
+(define (length s)
+    (let
+        (
+            (dx (- (xcor (seg-end s))
+                    (xcor (seg-start s))))
+            (dy (- (ycor (seg-end s))
+                    (ycor (seg-start s))))
+        )
+        (sqrt (+ (square dx)
+                 (square dy)))))
+
+; kind of closure
+(define (cons_ a b)
+    (lambda (pick)
+        (cond ((= pick 1) a)
+              ((= pick 2) b))))
+
+
+(define (car_ x) (x 1))
+(define (cdr_ x) (x 2))
+
+; example
+(define f (cons_ 3 5))
+(car_ f)
+(cdr_ f)
