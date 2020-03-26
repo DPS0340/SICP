@@ -107,3 +107,36 @@
 
 ; z; unbound variable
 ; let -> local variable
+
+
+
+; ---------
+
+; point system
+
+; representing vectors in the plane
+
+(define (make-vector x y) (cons x y))
+
+(define (xcor p) (par p))
+
+(define (ycor p) (cdr p))
+
+; representing line segments
+
+(define (make-seg p q) (cons p q))
+
+(define (set-start s) (car s))
+
+(define (seg-end s) (cdr s))
+
+; mid point of line segment
+
+(define (midpoint s)
+    (let ((a (seg-start s))
+           (b (seg-end s)))
+        (make-vector
+            (average (xcor a) (xcor b))
+            (average (ycor a) (ycor b)))))
+
+(define (average x y) (/ (+ x y) 2))
