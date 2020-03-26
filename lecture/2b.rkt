@@ -134,9 +134,10 @@
 
 (define (midpoint s)
     (let ((a (seg-start s))
-           (b (seg-end s)))
+          (b (seg-end s)))
         (make-vector
             (average (xcor a) (xcor b))
             (average (ycor a) (ycor b)))))
 
 (define (average x y) (/ (+ x y) 2))
+
