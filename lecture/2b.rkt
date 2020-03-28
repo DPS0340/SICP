@@ -117,7 +117,7 @@
         a
         (gcd b (remainder a b))))
 ;
-; for working example. not in lecture
+; For working example. not in lecture
 ;
 (define _a (make-rat-fixed 2 4))
 (numer _a)
@@ -134,9 +134,9 @@
 
 ; ---------
 
-; point system
+; Point System
 
-; representing vectors in the plane
+; Representing vectors in the plane
 
 (define (make-vector x y) (cons x y))
 
@@ -144,7 +144,7 @@
 
 (define (ycor p) (cdr p))
 
-; representing line segments
+; Representing line segments
 
 (define (make-seg p q) (cons p q))
 
@@ -152,7 +152,7 @@
 
 (define (seg-end s) (cdr s))
 
-; mid point of line segment
+; Mid point of line segment
 
 (define (midpoint s)
     (let ((a (seg-start s))
@@ -161,7 +161,7 @@
             (average (xcor a) (xcor b))
             (average (ycor a) (ycor b)))))
 
-; length of line segment
+; Length of line segment
 
 (define (length s)
     (let
