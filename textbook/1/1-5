@@ -1,0 +1,2 @@
+if interpreter uses applicative-order evaluation, it causes infinite recursion called stack overflow.
+in contrast, test function returns zero if evaluation order is normal.
