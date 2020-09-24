@@ -1,0 +1,3 @@
+if is not ordinary procedure in applicative-order because it does lazy evaluation.
+in other words, else clause will not be evaluated as long as predicate is #t. (or just some value which is not #f)
+by contrast, the evaluation of cond is just applicative in interpreter implementation.
